@@ -1,18 +1,27 @@
-import spart_ones 
-part_two = []
-part_one = []
-with open(str(spart_ones.argv[1])) as file:
+import sys
+doc = []
+
+
+def part_one():
+    fuel_sum = []
+    for mass in doc:
+        fuel_sum.append((mass/3)-2)
+    print(sum(fuel_sum))
+
+def part_two():
+    fuel_sum = []
+    for mass in doc:
+        while mass > 0:
+            mass = (mass/3)-2
+            if mass > 0:
+                fuel_sum.append(mass)
+    print(sum(fuel_sum))
+
+
+
+with open(str(sys.argv[1])) as file:
     for l in file:
-        n = int(l)
-        part_one.append((int(l) /3 )-2)
-        while n > 0:
-            n = (n /3 )-2
-            if n > 0:
-                part_two.append(n)
-
-
-
-
-print(sum(part_one))
-print(sum(part_two))
+        doc.append(int(l))
+    part_one()
+    part_two()
 
