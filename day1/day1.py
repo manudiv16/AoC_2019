@@ -1,7 +1,7 @@
-import spart_ones 
+import sys 
 part_two = []
 part_one = []
-with open(str(spart_ones.argv[1])) as file:
+with open(str(sys.argv[1])) as file:
     for l in file:
         n = int(l)
         part_one.append((int(l) /3 )-2)
