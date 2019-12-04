@@ -1,4 +1,3 @@
-import simple 
 
 def main():
     intcode = read()
