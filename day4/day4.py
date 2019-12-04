@@ -1,6 +1,6 @@
 
 
-
+encapsule=[]
 
 def hasrep(x):
     number = str(x)
@@ -11,51 +11,49 @@ def hasrep(x):
         else:
             new.append(n)
     return False
-
-def hasrep3(x):
-    number = str(x)
-    hola = any([(n==0 or number[n]!=number[n+1])and number[n]==number[n+1] and (n==len(number)-2) or number[n]!= number[n+2] for n in range(len(number)-2)])
-    return hola
-       
-        
-            
-        
-            
-
-    
-
+   
 def manortomajor(x):
     number = str(x)
     no = sorted(number)
     ne = "".join(no)
     if number == ne:
+        encapsule.append(number)
         return True
     else:
         return False
-
-def concat(zero,one,two,three,four,five):
-    return int("%d%d%d%d%d%d" % (zero,one,two,three,four,five))
 
 def part1():
     n=0
     for x in range(134792,675810):
         if hasrep(x) and manortomajor(x):
             n+=1
-    print(n)
+    return(n)
 
 def part2():
-    n=0
-    for x in range(134792,675810):
-
-        if not hasrep3(x) and manortomajor(x) :
-            n+=1
-    print(n)
-
+    resposta = []
+    for digits in encapsule:
+        count = 0
+        dianterior = ""
+        n=0
+        for di in digits:
+            if di==dianterior:
+                count = count + 1
+                if n==5:
+                    if count==1 and digits not in resposta:
+                            resposta.append(digits)
+            else:
+                if count == 1 and digits not in resposta:
+                    resposta.append(digits)
+                count = 0
+            n=n+1
+            
+            dianterior = di
+    return (len(resposta))
 
 
 def manin():
-    part1()
-    part2()
+    print(part1())
+    print(part2())
 
 manin()
 
