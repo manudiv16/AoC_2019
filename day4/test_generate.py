@@ -1,4 +1,6 @@
-count = 0
+
+
+
 encapsule = []
 for x in range(134792,675810):
     digit=str(x)
@@ -6,7 +8,7 @@ for x in range(134792,675810):
     sort = "".join(sor)
     if digit==sort:
         encapsule.append(digit)
-        count=count+1
+    
 
 
 resposta = []
