@@ -28,9 +28,9 @@ def read():
             
 def part1((points_wire_two,points_wire_one),path):
     print (min(map(lambda (x,y):abs(x)+abs(y) ,path)))
-    
+
 def part2((points_wire_one,points_wire_two),path):
-    print (min([points_wire_one[p]+points_wire_two[p] for p in path]))
+    print (min([points_wire_one[l]+points_wire_two[l] for l in path]))
     
 
 def main():
