@@ -1,10 +1,40 @@
-
+from collections import deque
 
 def read():
-    relations = open("input_test").read().split("\n")
-    relations = [x.split(")") for x in (relations)]
-    
-    return(relations)
+    lines = open("input").read().split("\n")
+    return [x.split(")") for x in (lines)]
+
+def main():
+    dic = {}
+    dic2 ={}
+    nodes = read()
+    for x in nodes:
+        if x[0] not in dic:
+            dic[x[0]]= []
+        if x[0] not in dic2:
+            dic2[x[0]] = []
+        if x[1] not in dic2:
+            dic2[x[1]]= []
+        dic[x[0]] = dic[x[0]]+[x[1]]
+        dic2[x[0]]= dic2[x[0]]+[x[1]]
+        dic2[x[1]]= dic2[x[1]]+[x[0]]
+    #print(dic)
+    part1(dic)
+    part2(dic2)
+
+
+def part2(dic):
+    D = {}
+    Q = deque()
+    Q.append(('YOU', 0))
+    while Q:
+        x,d = Q.popleft()
+        if x in D:
+            continue
+        D[x] = d
+        for y in dic[x]:
+            Q.append((y,d+1))
+    print(D["SAN"]-2)
 
 def part1(dic):
     count = 0
@@ -19,16 +49,6 @@ def sumdic(dic,clave):
     return sum
 
 
-
-def main():
-    dic = {}
-    nodes = read()
-    for x in nodes:
-        if x[0] not in dic:
-            dic[x[0]]= []
-        dic[x[0]]= dic[x[0]]+[x[1]]
-    part1(dic)
-    part2(dic)
-
+        
 
 main()
