@@ -8,6 +8,7 @@ def part_one():
         fuel_sum.append((mass/3)-2)
     print(sum(fuel_sum))
 
+
 def part_two():
     fuel_sum = []
     for mass in doc:
@@ -18,10 +19,8 @@ def part_two():
     print(sum(fuel_sum))
 
 
-
 with open(str(sys.argv[1])) as file:
     for l in file:
         doc.append(int(l))
     part_one()
     part_two()
-

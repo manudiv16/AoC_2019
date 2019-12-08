@@ -18,27 +18,30 @@ def get_points(A):
             length += 1
             if (x, y) not in result:
                 result[(x, y)] = length
-            
-    return result 
+
+    return result
 
 
 def read():
     wire_one, wire_two, _ = open("input.txt").read().split("\n")
-    return [x.split(",") for x in [wire_one, wire_two]] 
-            
-def part1((points_wire_two,points_wire_one),path):
-    print (min(map(lambda (x,y):abs(x)+abs(y) ,path)))
+    return [x.split(",") for x in [wire_one, wire_two]]
 
-def part2((points_wire_one,points_wire_two),path):
-    print (min([points_wire_one[l]+points_wire_two[l] for l in path]))
-    
+
+def part1((points_wire_two, points_wire_one), path):
+    print(min(map(lambda (x, y): abs(x)+abs(y), path)))
+
+
+def part2((points_wire_one, points_wire_two), path):
+    print(min([points_wire_one[l]+points_wire_two[l] for l in path]))
+
 
 def main():
 
     wire_one, wire_two = read()
-    poin = map(get_points,[wire_one,wire_two])
-    path = lambda (x,y) : set(x.keys()) & set(y.keys())
-    part1(poin,path(poin))
-    part2(poin,path(poin))
-    
+    poin = map(get_points, [wire_one, wire_two])
+    def path((x, y)): return set(x.keys()) & set(y.keys())
+    part1(poin, path(poin))
+    part2(poin, path(poin))
+
+
 main()
