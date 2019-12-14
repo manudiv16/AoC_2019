@@ -1,26 +1,27 @@
-import sys
-doc = []
+
+calcule_fuel = lambda x: (x/3)-2
+sum_fuel = lambda x :sum(calcule_fuel_two(x))
+
+def part_one(doc):
+   print("part 1: "+ str(sum(map(calcule_fuel, doc))))
+
+def part_two(doc):
+    print("part 2: "+ str(sum(map(sum_fuel,doc))))
+
+def calcule_fuel_two(mass):
+    if calcule_fuel(mass) > 0:
+        return [calcule_fuel(mass)]+calcule_fuel_two(calcule_fuel(mass))
+    else :
+        return []
+
+def raead():
+    document =  open("input").read().split("\n")
+    return map(int,document)
+
+    
+doc = raead()
+part_one(doc)
+part_two(doc)
 
 
-def part_one():
-    fuel_sum = []
-    for mass in doc:
-        fuel_sum.append((mass/3)-2)
-    print(sum(fuel_sum))
-
-
-def part_two():
-    fuel_sum = []
-    for mass in doc:
-        while mass > 0:
-            mass = (mass/3)-2
-            if mass > 0:
-                fuel_sum.append(mass)
-    print(sum(fuel_sum))
-
-
-with open(str(sys.argv[1])) as file:
-    for l in file:
-        doc.append(int(l))
-    part_one()
-    part_two()
+     

@@ -27,8 +27,9 @@ def read():
     return [x.split(",") for x in [wire_one, wire_two]]
 
 
-def part1((points_wire_two, points_wire_one), path):
+def part1( path):
     print(min(map(lambda (x, y): abs(x)+abs(y), path)))
+
 
 
 def part2((points_wire_one, points_wire_two), path):
@@ -40,7 +41,7 @@ def main():
     wire_one, wire_two = read()
     poin = map(get_points, [wire_one, wire_two])
     def path((x, y)): return set(x.keys()) & set(y.keys())
-    part1(poin, path(poin))
+    part1(path(poin))
     part2(poin, path(poin))
 
 
