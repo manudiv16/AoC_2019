@@ -1,60 +1,43 @@
 dic = {}
 dic2 = {}
 
+def create_dictionary_one(x): #only catch sons
+    if x[0] not in dic:
+        dic[x[0]] = []
+    dic[x[0]] = dic[x[0]]+[x[1]]
 
+def create_dictionary_two(x): # only catch father
+    if x[1] not in dic2:
+        dic2[x[1]] = x[0]
+
+    
 def create_dictionarys(nodes):
-    for x in nodes:
-        if x[0] not in dic:
-            dic[x[0]] = []
-        if x[1] not in dic2:
-            dic2[x[1]] = x[0]
-        dic[x[0]] = dic[x[0]]+[x[1]]
-
+    map(create_dictionary_one,nodes)
+    map(create_dictionary_two,nodes)
+    
 
 def read():
     lines = open("input").read().split("\n")
     return [x.split(")") for x in (lines)]
 
+def go_to_father(clave): # creat list, you or san to COM
+    if dic2[clave] == 'COM':
+        return [dic2[clave]]
+    else:
+        return [dic2[clave]]+go_to_father(dic2[clave])
 
-def go_to_father(clave):
-    array = []
-    while True:
-        if dic2[clave] == 'COM':
-            array.append(dic2[clave])
-            break
-        else:
-            array.append(dic2[clave])
-            clave = dic2[clave]
-    return array
-
-
-def sum_tree(clave):
-    sum = 0
-    for x in dic.get(clave, []):
-        sum += sum_tree(x)+1
-    return sum
+def sum_tree(clave): # sum distance for all nodes 
+    return sum(map(lambda x: sum_tree(x)+1, dic.get(clave, [])) )
 
 
 def part2():
     stack_YOU = go_to_father('YOU')
     stack_SAN = go_to_father('SAN')
-    hola = []
-    for x in stack_YOU:
-        if x not in hola:
-            hola.append(x)
-    for x in stack_SAN:
-        if x in hola:
-            hola.remove(x)
-        else:
-            hola.append(x)
-    print(len(hola))
+    print(len(set(stack_YOU) ^ set(stack_SAN))) # lenth of diference elements of both lists
 
 
 def part1():
-    count = 0
-    for clave in dic:
-        count += sum_tree(clave)
-    print(count)
+    print(sum(map(lambda clave : sum_tree(clave),dic))) # sum of distances
 
 
 def main():
@@ -65,3 +48,4 @@ def main():
 
 
 main()
+  

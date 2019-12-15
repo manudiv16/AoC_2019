@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python3
 
 coordenate = {'L': -1, 'R': 1, 'U': 0, 'D': 0}
 
@@ -25,28 +25,26 @@ def read():
     wire_one, wire_two, _ = open("input.txt").read().split("\n")
     return [x.split(",") for x in [wire_one, wire_two]]
 
-
 def absolute(path):
-    x, y = path
+    x,y = path
     return abs(x)+abs(y)
-
 
 def part1(path):
     print(min(map(absolute, path)))
 
 
+
 def part2(poin, path):
-    points_wire_one, points_wire_two = poin
-    print(min(map(lambda x: points_wire_one[x]+points_wire_two[x], path)))
+    points_wire_one,points_wire_two = poin
+    print(min(map(lambda x :points_wire_one[x]+points_wire_two[x] , path )))
 
 
 def main():
 
     wire_one, wire_two = read()
     poin = map(get_points, [wire_one, wire_two])
-
     def path(poin):
-        x, y = poin
+        x,y = poin
         return set(x.keys()) & set(y.keys())
     part1(path(poin))
     part2(poin, path(poin))
