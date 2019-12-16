@@ -20,8 +20,8 @@ def read():
     lines = open("input").read().split("\n")
     return [x.split(")") for x in (lines)]
 
-def go_to_father(clave): # creat list, you or san to COM
-    if dic2[clave] == 'COM':
+def go_to_father(clave,list_compare=[]): # creat list, you or san to COM
+    if dic2[clave] == 'COM' or dic2[clave] is in list_compare:
         return [dic2[clave]]
     else:
         return [dic2[clave]]+go_to_father(dic2[clave])
@@ -32,7 +32,7 @@ def sum_tree(clave): # sum distance for all nodes
 
 def part2():
     stack_YOU = go_to_father('YOU')
-    stack_SAN = go_to_father('SAN')
+    stack_SAN = go_to_father('SAN',stack_YOU)
     print(len(set(stack_YOU) ^ set(stack_SAN))) # lenth of diference elements of both lists
 
 
